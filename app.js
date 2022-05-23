@@ -11,6 +11,8 @@ app.use(express.json());
 
 var urlencodedParser= bodyParser.urlencoded({extended:false})
 
+const PORT=process.env.PORT||3000;
+
 app.get('/', (req, res)=>{
     res.render('index')
 });
@@ -144,4 +146,4 @@ app.get('/dummyPS/:id', (req, res) => {
     res.render('description', { title: titles[filename-1] , url: urls[filename-1] , data: data })
 });
 
-app.listen(5000)
+app.listen(PORT)
