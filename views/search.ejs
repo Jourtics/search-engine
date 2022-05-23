@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" type="text/css" href="../public/search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%=query%>
+    </title>
+
+</head>
+
+<body>
+
+    <%if(title.length==0){%>
+        <div class="unmatched">
+            <p>Your Search <strong>
+                    <%=query%>
+                </strong> did not match any documents.</p>
+            <p>Suggestions:</p>
+            <ul>
+                <li>Make sure that all words are spelled correctly.</li>
+                <li>Try different keywords.</li>
+                <li>Try more general keywords.</li>
+                <li>Try fewer keywords.</li>
+            </ul>
+        </div>
+
+
+        <%}%>
+
+            <%for(let i=0;i<title.length; i++){%>
+                <a class="link" target="__blank" href="/dummyPS/<%=url[i]%>">
+                    <%=title[i]%>
+                </a>
+                <p class="body">
+                    <%=st[i]%>
+                </p>
+                <br>
+                <%}%>
+
+                    <footer>
+                        <div class="footer-content">
+                            <ul class="socials">
+                                <li><a href="https://www.facebook.com/nandan.abhijeet.1/" target="__blank"><i
+                                            class="fa fa-facebook"></i> </a></li>
+                                <li><a href="mailto:abhijeetnandan02@gmail.com" target="__blank"><i
+                                            class="fa fa-google-plus"></i> </a></li>
+                                <li><a href="https://www.linkedin.com/in/abhijeet-nandan-0755a31b2/" target="__blank"><i
+                                            class="fa fa-linkedin-square"></i> </a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-bottom">
+                            <p>GO GREEN</p>
+                            <p>copyright &copy;2022 Designed By NANDAN</p>
+                        </div>
+                    </footer>
+
+</body>
+
+</html>
