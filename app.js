@@ -48,11 +48,11 @@ app.get('/search', (req, res) => {
 
     idf = fs.readFileSync('./public/dummyPS/idf.txt').toString().split('\r\n')
     keywords = fs.readFileSync('./public/dummyPS/keywords.txt').toString().split("\r\n")
-    magnitude = fs.readFileSync('./public/dummyPS/magnitude.txt').toString().split("\r\n")
+    magnitude = fs.readFileSync('./public/dummyPS/magnitude.txt').toString().split("\n")
     tf_idf = fs.readFileSync('./public/dummyPS/tf_idf.txt').toString().split("\r\n")
 
     console.log(magnitude);
-    
+
     idf.pop()
     keywords.pop()
     tf_idf.pop()
