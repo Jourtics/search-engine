@@ -2,15 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" type="text/css" href="./search.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-        <%=query%>
-    </title>
-
+    <%- include('./partials/header.ejs') %>
+        <link rel="stylesheet" type="text/css" href="/styles/search.css">
+        <title>
+            <%=query%>
+        </title>
 </head>
 
 <body>
@@ -33,31 +29,16 @@
         <%}%>
 
             <%for(let i=0;i<title.length; i++){%>
-                <a class="link" target="__blank" href="/public/dummyPS/<%=url[i]%>">
+                <a class="link" target="_blank" href="./dummyPS/<%=url[i]%>">
                     <%=title[i]%>
                 </a>
                 <p class="body">
-                    <%=st[i]%>
+                    <%=st[i]%>.......
                 </p>
                 <br>
                 <%}%>
 
-                    <footer>
-                        <div class="footer-content">
-                            <ul class="socials">
-                                <li><a href="https://www.facebook.com/nandan.abhijeet.1/" target="__blank"><i
-                                            class="fa fa-facebook"></i> </a></li>
-                                <li><a href="mailto:abhijeetnandan02@gmail.com" target="__blank"><i
-                                            class="fa fa-google-plus"></i> </a></li>
-                                <li><a href="https://www.linkedin.com/in/abhijeet-nandan-0755a31b2/" target="__blank"><i
-                                            class="fa fa-linkedin-square"></i> </a></li>
-                            </ul>
-                        </div>
-                        <div class="footer-bottom">
-                            <p>GO GREEN</p>
-                            <p>copyright &copy;2022 Designed By NANDAN</p>
-                        </div>
-                    </footer>
+                    <%- include('./partials/footer.ejs') %>
 
 </body>
 

@@ -1,88 +1,71 @@
-var express=require('express')
-var bodyParser=require('body-parser');
+var express = require('express')
 const fs = require('fs');
-const SpellChecker  = require('spellchecker');
+const SpellChecker = require('spellchecker');
 const { removeStopwords } = require('stopword')
-const app=express()
+const app = express()
 const lemmatizer = require('wink-lemmatizer');
-const path=require("path")
+const path = require("path")
 app.set('view engine', 'ejs')
 
-app.use(express.static(path.join(__dirname, "\public")))
-console.log(path.join(__dirname, "/public"))
+app.use(express.static(path.join(__dirname, "/public")))
+
 app.use(express.json());
 
-var urlencodedParser= bodyParser.urlencoded({extended:false})
+const PORT = process.env.PORT || 5000;
 
-const PORT=process.env.PORT||5000;
-
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     res.render('index')
 });
 
 
+titles = fs.readFileSync('./dummyPS/titles.txt').toString().split(/\r?\n/)
+urls = fs.readFileSync('./dummyPS/urls.txt').toString().split(/\r?\n/)
 
-// titles = fs.readFileSync('./public/dummyPS/titles.txt').toString().split("\r\n")
-// urls = fs.readFileSync('./public/dummyPS/urls.txt').toString().split("\r\n")
+// console.log(titles)
 
-// idf = fs.readFileSync('./public/dummyPS/idf.txt').toString().split('\r\n')
-// keywords = fs.readFileSync('./public/dummyPS/keywords.txt').toString().split("\r\n")
-// magnitude = fs.readFileSync('./public/dummyPS/magnitude.txt').toString().split("\r\n")
-// tf_idf = fs.readFileSync('./public/dummyPS/tf_idf.txt').toString().split("\r\n")
-
-titles = fs.readFileSync('./public/dummyPS/titles.txt').toString().split(/\r?\n/)
-urls = fs.readFileSync('./public/dummyPS/urls.txt').toString().split(/\r?\n/)
-
-console.log(titles)
-idf = fs.readFileSync('./public/dummyPS/idf.txt').toString().split(/\r?\n/)
-keywords = fs.readFileSync('./public/dummyPS/keywords.txt').toString().split(/\r?\n/)
-magnitude = fs.readFileSync('./public/dummyPS/magnitude.txt').toString().split(/\r?\n/)
-tf_idf = fs.readFileSync('./public/dummyPS/tf_idf.txt').toString().split(/\r?\n/)
+idf = fs.readFileSync('./dummyPS/idf.txt').toString().split(/\r?\n/)
+keywords = fs.readFileSync('./dummyPS/keywords.txt').toString().split(/\r?\n/)
+magnitude = fs.readFileSync('./dummyPS/magnitude.txt').toString().split(/\r?\n/)
+tf_idf = fs.readFileSync('./dummyPS/tf_idf.txt').toString().split(/\r?\n/)
 
 idf.pop()
 keywords.pop()
 tf_idf.pop()
 magnitude.pop()
 
-// idf=[]
-// keywords=[]
-// tf_idf=[]
-// magnitude=[]
 
 app.get('/search', (req, res) => {
 
-    console.log(magnitude);
+    // console.log(magnitude);
 
-    // import { lemmatizer } from "lemmatizer";
-    var query=req.query.query    
+    var query = req.query.query
 
     query_Words = removeStopwords(query.split(' '))
 
-    queryWords=[]
-    
+    queryWords = []
+
     // to avoid empty strings 
-    for(let i=0; i<query_Words.length;i++){
-        if(query_Words[i]!='')
+    for (let i = 0; i < query_Words.length; i++) {
+        if (query_Words[i] != '')
             queryWords.push(query_Words[i])
     }
 
-    console.log(queryWords)
-    let len =queryWords.length
-    for(let i=0;i<len;i++)
-    {
-        queryWords[i]=queryWords[i].toLowerCase();
-        if(SpellChecker.isMisspelled(queryWords[i]))
-        {
+    // console.log(queryWords)
+    let len = queryWords.length
+
+    for (let i = 0; i < len; i++) {
+        queryWords[i] = queryWords[i].toLowerCase();
+        if (SpellChecker.isMisspelled(queryWords[i])) {
             corrected_words = SpellChecker.getCorrectionsForMisspelling(queryWords[i]);
-            if(corrected_words.length>0)
-                queryWords[i]=corrected_words[0];
+            if (corrected_words.length > 0)
+                queryWords[i] = corrected_words[0];
         }
-        console.log(queryWords[i])
-        queryWords[i]=lemmatizer.verb(queryWords[i]);
-        console.log(queryWords[i])
+        // console.log(queryWords[i])
+        queryWords[i] = lemmatizer.verb(queryWords[i]);
+        // console.log(queryWords[i])
     }
 
-    console.log(queryWords)
+    // console.log(queryWords)
 
     query_tf = []
     i = 0
@@ -131,51 +114,50 @@ app.get('/search', (req, res) => {
     final_cos.sort((a, b) => {
         return Number(b[0]) - Number(a[0])
     })
-    console.log(final_cos)
+
+    // console.log(final_cos)
 
     // Now create a database of 10 files along with their titles and URLS to send to the search.ejs file.
     // It should have titles, URLs, and Problem Descriptions.
 
-    frequency=10;
+    frequency = 10;
 
-    seq=[]
+    seq = []
 
-    for(let i=0;i<frequency;i++){
-        seq[i]=final_cos[i][1]
+    for (let i = 0; i < frequency; i++) {
+        seq[i] = final_cos[i][1]
     }
-    
+
     // data = fs.readFileSync('./dummyPS/2.txt', 'utf-8').toString().split('\n')
-    console.log(seq)
-    s=[]
+    // console.log(seq)
+    s = []
 
-    for(let i=0;i<frequency;i++)
-    {
-        s[i] = fs.readFileSync('./public/dummyPS/' + (seq[i] + 1).toString() + '.txt').toString().split('\n')
+    for (let i = 0; i < frequency; i++) {
+        s[i] = fs.readFileSync('./dummyPS/' + (seq[i] + 1).toString() + '.txt').toString().split('\n')
     }
 
-    at=[]
-    aurl=[]
-    ast=[]
+    _titles = []
+    _urls = []
+    _statements = []
 
-    for(let i=0; i<frequency; i++)  
-    {
-        if(final_cos[i][0]==0 || isNaN(final_cos[i][0]))
+    for (let i = 0; i < frequency; i++) {
+        if (final_cos[i][0] == 0 || isNaN(final_cos[i][0]))
             break;
 
-        at[i]=titles[seq[i]];
-        aurl[i]=seq[i]+1;
-        ast[i]=s[i][0];
+        _titles[i] = titles[seq[i]];
+        _urls[i] = seq[i] + 1;
+        _statements[i] = s[i][0];
     }
-    
-    res.render('search',{query:query, title:at, url:aurl, st:ast})
+
+    res.render('search', { query: query, title: _titles, url: _urls, st: _statements })
 });
 
 
-app.get('/public/dummyPS/:id', (req, res) => {
+app.get('/dummyPS/:id', (req, res) => {
     filename = req.params.id.toString()
     // console.log(filename)
-    data = fs.readFileSync('./public/dummyPS/' + filename +".txt", 'utf-8').toString().split('\n')
-    res.render('description', { title: titles[filename-1] , url: urls[filename-1] , data: data })
+    data = fs.readFileSync('./dummyPS/' + filename + ".txt", 'utf-8').toString().split('\n')
+    res.render('description', { title: titles[filename - 1], url: urls[filename - 1], data: data })
 });
 
 app.listen(PORT)
