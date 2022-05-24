@@ -21,23 +21,23 @@ app.get('/', (req, res)=>{
 });
 
 
-// titles = fs.readFileSync('./dummyPS/titles.txt').toString().split("\r\n")
-// urls = fs.readFileSync('./dummyPS/urls.txt').toString().split("\r\n")
+titles = fs.readFileSync('./public/dummyPS/titles.txt').toString().split("\r\n")
+urls = fs.readFileSync('./public/dummyPS/urls.txt').toString().split("\r\n")
 
-// idf = fs.readFileSync('./dummyPS/idf.txt').toString().split('\r\n')
-// keywords = fs.readFileSync('./dummyPS/keywords.txt').toString().split("\r\n")
-// magnitude = fs.readFileSync('./dummyPS/magnitude.txt').toString().split("\r\n")
-// tf_idf = fs.readFileSync('./dummyPS/tf_idf.txt').toString().split("\r\n")
+idf = fs.readFileSync('./public/dummyPS/idf.txt').toString().split('\r\n')
+keywords = fs.readFileSync('./public/dummyPS/keywords.txt').toString().split("\r\n")
+magnitude = fs.readFileSync('./public/dummyPS/magnitude.txt').toString().split("\r\n")
+tf_idf = fs.readFileSync('./public/dummyPS/tf_idf.txt').toString().split("\r\n")
 
-// idf.pop()
-// keywords.pop()
-// tf_idf.pop()
-// magnitude.pop()
+idf.pop()
+keywords.pop()
+tf_idf.pop()
+magnitude.pop()
 
-idf=[]
-keywords=[]
-tf_idf=[]
-magnitude=[]
+// idf=[]
+// keywords=[]
+// tf_idf=[]
+// magnitude=[]
 
 app.get('/search', (req, res) => {
     // import { lemmatizer } from "lemmatizer";
@@ -123,7 +123,7 @@ app.get('/search', (req, res) => {
     // Now create a database of 10 files along with their titles and URLS to send to the search.ejs file.
     // It should have titles, URLs, and Problem Descriptions.
 
-    frequency=0;
+    frequency=10;
 
     seq=[]
     for(let i=0;i<frequency;i++){
@@ -135,7 +135,7 @@ app.get('/search', (req, res) => {
     s=[]
     for(let i=0;i<frequency;i++)
     {
-        s[i] = fs.readFileSync('./dummyPS/' + (seq[i] + 1).toString() + '.txt', 'utf-8').toString().split('\r\n')
+        s[i] = fs.readFileSync('./public/dummyPS/' + (seq[i] + 1).toString() + '.txt', 'utf-8').toString().split('\r\n')
     }
 
     at=[]
@@ -155,10 +155,10 @@ app.get('/search', (req, res) => {
 });
 
 
-app.get('/dummyPS/:id', (req, res) => {
+app.get('/public/dummyPS/:id', (req, res) => {
     filename = req.params.id.toString()
     // console.log(filename)
-    data = fs.readFileSync('./dummyPS/' + filename +".txt", 'utf-8').toString().split('\r\n')
+    data = fs.readFileSync('./public/dummyPS/' + filename +".txt", 'utf-8').toString().split('\r\n')
     res.render('description', { title: titles[filename-1] , url: urls[filename-1] , data: data })
 });
 
