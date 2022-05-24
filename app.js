@@ -21,11 +21,6 @@ app.get('/', (req, res)=>{
 });
 
 
-try {
-    titles = fs.readFileSync('./public/dummyPS/titles.txt').toString().split("\r\n")
-} catch (error) {
-    console.log(error)
-}
 
 titles = fs.readFileSync('./public/dummyPS/titles.txt').toString().split("\r\n")
 urls = fs.readFileSync('./public/dummyPS/urls.txt').toString().split("\r\n")
@@ -129,7 +124,7 @@ app.get('/search', (req, res) => {
     // Now create a database of 10 files along with their titles and URLS to send to the search.ejs file.
     // It should have titles, URLs, and Problem Descriptions.
 
-    frequency=10;
+    frequency=0;
 
     seq=[]
     for(let i=0;i<frequency;i++){
