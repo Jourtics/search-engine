@@ -21,6 +21,12 @@ app.get('/', (req, res)=>{
 });
 
 
+try {
+    titles = fs.readFileSync('./public/dummyPS/titles.txt').toString().split("\r\n")
+} catch (error) {
+    console.log(error)
+}
+
 titles = fs.readFileSync('./public/dummyPS/titles.txt').toString().split("\r\n")
 urls = fs.readFileSync('./public/dummyPS/urls.txt').toString().split("\r\n")
 
