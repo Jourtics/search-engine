@@ -4,7 +4,7 @@ const fs = require('fs');
 const SpellChecker  = require('spellchecker');
 const { removeStopwords } = require('stopword')
 const app=express()
-const {lemmatizer}=require('lemmatizer')
+const lemmatizer = require('wink-lemmatizer');
 app.set('view engine', 'ejs')
 app.use('/public', express.static('public'));
 app.use(express.json());
@@ -34,11 +34,19 @@ magnitude.pop()
 app.get('/search', (req, res) => {
     // import { lemmatizer } from "lemmatizer";
     var query=req.query.query    
+
+    query_Words = removeStopwords(query.split(' '))
+
+    queryWords=[]
     
+    // to avoid empty strings 
+    for(let i=0; i<query_Words.length;i++){
+        if(query_Words[i]!='')
+            queryWords.push(query_Words[i])
+    }
 
-    queryWords = removeStopwords(query.split(' '))
-    let len=queryWords.length;
-
+    console.log(queryWords)
+    let len =queryWords.length
     for(let i=0;i<len;i++)
     {
         queryWords[i]=queryWords[i].toLowerCase();
@@ -49,11 +57,11 @@ app.get('/search', (req, res) => {
                 queryWords[i]=corrected_words[0];
         }
         console.log(queryWords[i])
-        queryWords.push(lemmatizer(queryWords[i]));
+        queryWords[i]=lemmatizer.verb(queryWords[i]);
         console.log(queryWords[i])
     }
 
-    // console.log(queryWords)
+    console.log(queryWords)
 
     query_tf = []
     i = 0

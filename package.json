@@ -1,5 +1,5 @@
 {
-  "main":"app.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
@@ -10,6 +10,7 @@
     "lemmatizer": "^0.0.1",
     "nodemon": "^2.0.16",
     "spellchecker": "^3.7.1",
-    "stopword": "^2.0.2"
+    "stopword": "^2.0.2",
+    "wink-lemmatizer": "^3.0.2"
   }
 }
