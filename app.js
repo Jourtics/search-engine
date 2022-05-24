@@ -41,6 +41,22 @@ magnitude.pop()
 // magnitude=[]
 
 app.get('/search', (req, res) => {
+
+
+    titles = fs.readFileSync('./public/dummyPS/titles.txt').toString().split("\r\n")
+    urls = fs.readFileSync('./public/dummyPS/urls.txt').toString().split("\r\n")
+
+    idf = fs.readFileSync('./public/dummyPS/idf.txt').toString().split('\r\n')
+    keywords = fs.readFileSync('./public/dummyPS/keywords.txt').toString().split("\r\n")
+    magnitude = fs.readFileSync('./public/dummyPS/magnitude.txt').toString().split("\r\n")
+    tf_idf = fs.readFileSync('./public/dummyPS/tf_idf.txt').toString().split("\r\n")
+
+    idf.pop()
+    keywords.pop()
+    tf_idf.pop()
+    magnitude.pop()
+
+    
     // import { lemmatizer } from "lemmatizer";
     var query=req.query.query    
 
@@ -110,7 +126,6 @@ app.get('/search', (req, res) => {
         cos[a - 1] = cos[a - 1] + c * query_tf_idf[b - 1]
     }
 
-    console.log(magnitude.length);
     final_cos = []
     for (let i = 0; i < magnitude.length; i++) {
         cos[i] = cos[i] / (Number(magnitude[i]) * query_magnitude)
