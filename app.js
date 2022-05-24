@@ -11,7 +11,7 @@ app.use(express.json());
 
 var urlencodedParser= bodyParser.urlencoded({extended:false})
 
-const PORT=process.env.PORT||3000;
+const PORT=process.env.PORT||5000;
 
 app.get('/', (req, res)=>{
     res.render('index')
