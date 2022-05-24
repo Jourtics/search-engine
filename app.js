@@ -124,7 +124,7 @@ app.get('/search', (req, res) => {
     // Now create a database of 10 files along with their titles and URLS to send to the search.ejs file.
     // It should have titles, URLs, and Problem Descriptions.
 
-    frequency=0;
+    frequency=1;
 
     seq=[]
     for(let i=0;i<frequency;i++){
