@@ -33,7 +33,7 @@ magnitude.pop()
 
 app.get('/search', (req, res) => {
     // import { lemmatizer } from "lemmatizer";
-    query=req.query.query    
+    var query=req.query.query    
     
 
     queryWords = removeStopwords(query.split(' '))
