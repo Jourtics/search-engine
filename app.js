@@ -18,15 +18,15 @@ app.get('/', (req, res) => {
 });
 
 
-titles = fs.readFileSync('./dummyPS/titles.txt').toString().split(/\r?\n/)
-urls = fs.readFileSync('./dummyPS/urls.txt').toString().split(/\r?\n/)
+titles = fs.readFileSync('./PS/titles.txt').toString().split(/\r?\n/)
+urls = fs.readFileSync('./PS/urls.txt').toString().split(/\r?\n/)
 
 // console.log(titles)
 
-idf = fs.readFileSync('./dummyPS/idf.txt').toString().split(/\r?\n/)
-keywords = fs.readFileSync('./dummyPS/keywords.txt').toString().split(/\r?\n/)
-magnitude = fs.readFileSync('./dummyPS/magnitude.txt').toString().split(/\r?\n/)
-tf_idf = fs.readFileSync('./dummyPS/tf_idf.txt').toString().split(/\r?\n/)
+idf = fs.readFileSync('./PS/idf.txt').toString().split(/\r?\n/)
+keywords = fs.readFileSync('./PS/keywords.txt').toString().split(/\r?\n/)
+magnitude = fs.readFileSync('./PS/magnitude.txt').toString().split(/\r?\n/)
+tf_idf = fs.readFileSync('./PS/tf_idf.txt').toString().split(/\r?\n/)
 
 idf.pop()
 keywords.pop()
@@ -128,12 +128,13 @@ app.get('/search', (req, res) => {
         seq[i] = final_cos[i][1]
     }
 
-    // data = fs.readFileSync('./dummyPS/2.txt', 'utf-8').toString().split('\n')
-    // console.log(seq)
+    // data = fs.readFileSync('./PS/2.txt', 'utf-8').toString().split('\n')
+
     s = []
 
     for (let i = 0; i < frequency; i++) {
-        s[i] = fs.readFileSync('./dummyPS/' + (seq[i] + 1).toString() + '.txt').toString().split('\n')
+        s[i] = fs.readFileSync('./PS/' + (seq[i] + 1).toString() + '.txt').toString().split('\n')
+        // console.log(seq[i])
     }
 
     _titles = []
@@ -146,17 +147,25 @@ app.get('/search', (req, res) => {
 
         _titles[i] = titles[seq[i]];
         _urls[i] = seq[i] + 1;
-        _statements[i] = s[i][0];
+
+        let j=0
+        _statements[i]=""
+
+        while(j<s[i].length && s[i][j].length<=1)
+            j++;
+
+        if(j<s[i].length)
+            _statements[i]=s[i][j];  
     }
 
     res.render('search', { query: query, title: _titles, url: _urls, st: _statements })
 });
 
 
-app.get('/dummyPS/:id', (req, res) => {
+app.get('/PS/:id', (req, res) => {
     filename = req.params.id.toString()
     // console.log(filename)
-    data = fs.readFileSync('./dummyPS/' + filename + ".txt", 'utf-8').toString().split('\n')
+    data = fs.readFileSync('./PS/' + filename + ".txt", 'utf-8').toString().split('\n')
     res.render('description', { title: titles[filename - 1], url: urls[filename - 1], data: data })
 });
 
