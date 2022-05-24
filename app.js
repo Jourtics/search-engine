@@ -146,7 +146,7 @@ app.get('/search', (req, res) => {
         aurl[i]=seq[i]+1;
         ast[i]=s[i][0];
     }
-    // res.render('search',{query:query, title:at, url:aurl, st:ast})
+    res.render('search',{query:query, title:at, url:aurl, st:ast})
 });
 
 
