@@ -22,13 +22,21 @@ app.get('/', (req, res)=>{
 
 
 
-titles = fs.readFileSync('./public/dummyPS/titles.txt').toString().split("\r\n")
-urls = fs.readFileSync('./public/dummyPS/urls.txt').toString().split("\r\n")
+// titles = fs.readFileSync('./public/dummyPS/titles.txt').toString().split("\r\n")
+// urls = fs.readFileSync('./public/dummyPS/urls.txt').toString().split("\r\n")
 
-idf = fs.readFileSync('./public/dummyPS/idf.txt').toString().split('\r\n')
-keywords = fs.readFileSync('./public/dummyPS/keywords.txt').toString().split("\r\n")
-magnitude = fs.readFileSync('./public/dummyPS/magnitude.txt').toString().split("\r\n")
-tf_idf = fs.readFileSync('./public/dummyPS/tf_idf.txt').toString().split("\r\n")
+// idf = fs.readFileSync('./public/dummyPS/idf.txt').toString().split('\r\n')
+// keywords = fs.readFileSync('./public/dummyPS/keywords.txt').toString().split("\r\n")
+// magnitude = fs.readFileSync('./public/dummyPS/magnitude.txt').toString().split("\r\n")
+// tf_idf = fs.readFileSync('./public/dummyPS/tf_idf.txt').toString().split("\r\n")
+
+titles = fs.readFileSync('./public/dummyPS/titles.txt').toString().split("\n")
+urls = fs.readFileSync('./public/dummyPS/urls.txt').toString().split("\n")
+
+idf = fs.readFileSync('./public/dummyPS/idf.txt').toString().split('\n')
+keywords = fs.readFileSync('./public/dummyPS/keywords.txt').toString().split("\n")
+magnitude = fs.readFileSync('./public/dummyPS/magnitude.txt').toString().split("\n")
+tf_idf = fs.readFileSync('./public/dummyPS/tf_idf.txt').toString().split("\n")
 
 idf.pop()
 keywords.pop()
@@ -42,22 +50,7 @@ magnitude.pop()
 
 app.get('/search', (req, res) => {
 
-
-    titles = fs.readFileSync('./public/dummyPS/titles.txt').toString().split("\r\n")
-    urls = fs.readFileSync('./public/dummyPS/urls.txt').toString().split("\r\n")
-
-    idf = fs.readFileSync('./public/dummyPS/idf.txt').toString().split('\r\n')
-    keywords = fs.readFileSync('./public/dummyPS/keywords.txt').toString().split("\r\n")
-    magnitude = fs.readFileSync('./public/dummyPS/magnitude.txt').toString().split("\n")
-    tf_idf = fs.readFileSync('./public/dummyPS/tf_idf.txt').toString().split("\r\n")
-
     console.log(magnitude);
-
-    idf.pop()
-    keywords.pop()
-    tf_idf.pop()
-    magnitude.pop()
-
 
     // import { lemmatizer } from "lemmatizer";
     var query=req.query.query    
