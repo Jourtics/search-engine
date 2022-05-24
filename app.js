@@ -135,10 +135,11 @@ app.get('/search', (req, res) => {
     console.log(seq)
     s=[]
 
-    // for(let i=0;i<frequency;i++)
-    // {
-    //     s[i] = fs.readFileSync('./public/dummyPS/' + (seq[i] + 1).toString() + '.txt').toString().split('\r\n')
-    // }
+    for(let i=0;i<frequency;i++)
+    {
+        // s[i] = fs.readFileSync('./public/dummyPS/' + (seq[i] + 1).toString() + '.txt').toString().split('\r\n')
+        s[i] = fs.readFileSync('./public/dummyPS/1.txt').toString().split('\r\n')
+    }
 
     at=[]
     aurl=[]
@@ -151,8 +152,8 @@ app.get('/search', (req, res) => {
 
         at[i]=titles[seq[i]];
         aurl[i]=seq[i]+1;
-        // ast[i]=s[i][0];
-        ast[i]="";
+        ast[i]=s[i][0];
+        // ast[i]="";
     }
     res.render('search',{query:query, title:at, url:aurl, st:ast})
 });
