@@ -149,7 +149,7 @@ app.get('/search', (req, res) => {
 
     for(let i=0;i<frequency;i++)
     {
-        s[i] = fs.readFileSync('./public/dummyPS/' + (seq[i] + 1).toString() + '.txt').toString().split('\r\n')
+        s[i] = fs.readFileSync('./public/dummyPS/' + (seq[i] + 1).toString() + '.txt').toString().split('\n')
     }
 
     at=[]
