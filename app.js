@@ -173,7 +173,7 @@ app.get('/search', (req, res) => {
 app.get('/public/dummyPS/:id', (req, res) => {
     filename = req.params.id.toString()
     // console.log(filename)
-    data = fs.readFileSync('./public/dummyPS/' + filename +".txt", 'utf-8').toString().split('\r\n')
+    data = fs.readFileSync('./public/dummyPS/' + filename +".txt", 'utf-8').toString().split('\n')
     res.render('description', { title: titles[filename-1] , url: urls[filename-1] , data: data })
 });
 
