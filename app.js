@@ -51,12 +51,14 @@ app.get('/search', (req, res) => {
     magnitude = fs.readFileSync('./public/dummyPS/magnitude.txt').toString().split("\r\n")
     tf_idf = fs.readFileSync('./public/dummyPS/tf_idf.txt').toString().split("\r\n")
 
+    console.log(magnitude);
+    
     idf.pop()
     keywords.pop()
     tf_idf.pop()
     magnitude.pop()
 
-    
+
     // import { lemmatizer } from "lemmatizer";
     var query=req.query.query    
 
