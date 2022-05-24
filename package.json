@@ -13,6 +13,9 @@
     "stopword": "^2.0.2",
     "wink-lemmatizer": "^3.0.2"
   },
+  "engines":{
+    "node":"8.5.5"
+  },
   "devDependencies": {},
   "scripts": {
     "start": "node app.js",
