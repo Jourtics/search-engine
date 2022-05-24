@@ -21,18 +21,23 @@ app.get('/', (req, res)=>{
 });
 
 
-titles = fs.readFileSync('./dummyPS/titles.txt').toString().split("\r\n")
-urls = fs.readFileSync('./dummyPS/urls.txt').toString().split("\r\n")
+// titles = fs.readFileSync('./dummyPS/titles.txt').toString().split("\r\n")
+// urls = fs.readFileSync('./dummyPS/urls.txt').toString().split("\r\n")
 
-idf = fs.readFileSync('./dummyPS/idf.txt').toString().split('\r\n')
-keywords = fs.readFileSync('./dummyPS/keywords.txt').toString().split("\r\n")
-magnitude = fs.readFileSync('./dummyPS/magnitude.txt').toString().split("\r\n")
-tf_idf = fs.readFileSync('./dummyPS/tf_idf.txt').toString().split("\r\n")
+// idf = fs.readFileSync('./dummyPS/idf.txt').toString().split('\r\n')
+// keywords = fs.readFileSync('./dummyPS/keywords.txt').toString().split("\r\n")
+// magnitude = fs.readFileSync('./dummyPS/magnitude.txt').toString().split("\r\n")
+// tf_idf = fs.readFileSync('./dummyPS/tf_idf.txt').toString().split("\r\n")
 
-idf.pop()
-keywords.pop()
-tf_idf.pop()
-magnitude.pop()
+// idf.pop()
+// keywords.pop()
+// tf_idf.pop()
+// magnitude.pop()
+
+idf=[]
+keywords=[]
+tf_idf=[]
+magnitude=[]
 
 app.get('/search', (req, res) => {
     // import { lemmatizer } from "lemmatizer";
@@ -118,7 +123,7 @@ app.get('/search', (req, res) => {
     // Now create a database of 10 files along with their titles and URLS to send to the search.ejs file.
     // It should have titles, URLs, and Problem Descriptions.
 
-    frequency=10;
+    frequency=0;
 
     seq=[]
     for(let i=0;i<frequency;i++){
