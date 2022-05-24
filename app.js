@@ -110,6 +110,7 @@ app.get('/search', (req, res) => {
         cos[a - 1] = cos[a - 1] + c * query_tf_idf[b - 1]
     }
 
+    console.log(magnitude.length);
     final_cos = []
     for (let i = 0; i < magnitude.length; i++) {
         cos[i] = cos[i] / (Number(magnitude[i]) * query_magnitude)
@@ -127,6 +128,7 @@ app.get('/search', (req, res) => {
     frequency=10;
 
     seq=[]
+
     for(let i=0;i<frequency;i++){
         seq[i]=final_cos[i][1]
     }
