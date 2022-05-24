@@ -5,8 +5,11 @@ const SpellChecker  = require('spellchecker');
 const { removeStopwords } = require('stopword')
 const app=express()
 const lemmatizer = require('wink-lemmatizer');
+const path=require("path")
 app.set('view engine', 'ejs')
-app.use('/public', express.static('public'));
+
+app.use(express.static(path.join(__dirname, "\public")))
+console.log(path.join(__dirname, "/public"))
 app.use(express.json());
 
 var urlencodedParser= bodyParser.urlencoded({extended:false})

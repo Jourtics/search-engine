@@ -4,7 +4,7 @@
 }
 
 body {
-    background-image: url("../public/images/search_background.jpg");
+    background-image: url("./images/search_background.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     image-rendering: pixelated;
