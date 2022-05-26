@@ -1,0 +1,23 @@
+Let  (n) denote the sum of divisors of an integer n. For example,  (12)=1+2+3+4+6+12=28.
+
+Your task is to calculate the sum  i=1n (i) modulo 10^9+7.
+
+Input
+
+The only input line has an integer n.
+
+Output
+
+Print  i=1n (i) modulo 10^9+7.
+
+Constraints
+
+1<=n<=10^12
+
+Example
+
+Input:
+5
+
+Output:
+21 

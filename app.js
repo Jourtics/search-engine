@@ -4,6 +4,7 @@ const SpellChecker = require('spellchecker');
 const { removeStopwords } = require('stopword')
 const app = express()
 const lemmatizer = require('wink-lemmatizer');
+const stemmer = require('@stdlib/nlp-porter-stemmer');
 const path = require("path")
 app.set('view engine', 'ejs')
 
@@ -42,27 +43,37 @@ app.get('/search', (req, res) => {
 
     query_Words = removeStopwords(query.split(' '))
 
-    queryWords = []
+    QueryWords = []
 
     // to avoid empty strings 
     for (let i = 0; i < query_Words.length; i++) {
         if (query_Words[i] != '')
-            queryWords.push(query_Words[i])
+            QueryWords.push(query_Words[i])
     }
 
-    // console.log(queryWords)
-    let len = queryWords.length
-
+    // console.log(QueryWords)
+    let len = QueryWords.length
+    queryWords=[]
     for (let i = 0; i < len; i++) {
-        queryWords[i] = queryWords[i].toLowerCase();
-        if (SpellChecker.isMisspelled(queryWords[i])) {
-            corrected_words = SpellChecker.getCorrectionsForMisspelling(queryWords[i]);
+        arr=[]
+        QueryWords[i] = QueryWords[i].toLowerCase();
+
+        if (SpellChecker.isMisspelled(QueryWords[i])) {
+            corrected_words = SpellChecker.getCorrectionsForMisspelling(QueryWords[i]);
             if (corrected_words.length > 0)
-                queryWords[i] = corrected_words[0];
+                QueryWords[i] = corrected_words[0].toLowerCase();
         }
-        // console.log(queryWords[i])
-        queryWords[i] = lemmatizer.verb(queryWords[i]);
-        // console.log(queryWords[i])
+
+        arr.push(lemmatizer.verb(QueryWords[i]));
+        arr.push(lemmatizer.noun(QueryWords[i]));
+        arr.push(lemmatizer.adjective(QueryWords[i]));
+        arr.push(stemmer(QueryWords[i]));
+
+        arr= new Set(arr)
+
+        arr.forEach(ele=>{
+            queryWords.push(ele)
+        })
     }
 
     // console.log(queryWords)
