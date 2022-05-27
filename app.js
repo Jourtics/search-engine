@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 });
 
 
-// Read all the files and store in array
+// Read all the files and store in the array  
 // Split by '\r\n'
 
 titles = fs.readFileSync('./PS/titles.txt').toString().split(/\r?\n/)
