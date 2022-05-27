@@ -124,7 +124,7 @@ app.get('/search', (req, res) => {
         i = i + 1
     });
 
-    // calculate the TF-IDF value.
+    // calculate the TF-IDF value
 
     query_tf_idf = []
 
