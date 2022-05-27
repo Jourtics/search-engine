@@ -2,10 +2,10 @@
 
 # Description:
 
-It is a Search Engine specifically for Data Structure and Algorithm Problems. The user can type in any keyword and related problems will be displayed. It uses <strong>Cosine-Similarity Algorithm <strong>to search for results
+It is a Search Engine specifically for Data Structure and Algorithm Problems. The user can type in any keyword and related problems will be displayed. It uses **Cosine-Similarity Algorithm** to search for results
 
 # Built Using:
-JavaScript, ES6, Node.js, Express, HTML, CSS, Python(For Preparing Dataset)
+JavaScript, ES6, Node.js, Express, HTML, CSS, Python(For Preparing Dataset), Beautiful Soup(For Web Scraping)
 
 # Installation
 To clone the repo, run ```git clone https://github.com/Jourtics/search-engine-1.1.git``` in your terminal. After cloning the repo, run ```npm install``` to install the necessary dependencies.
