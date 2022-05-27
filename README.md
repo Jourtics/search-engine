@@ -8,7 +8,7 @@ It is a Search Engine specifically for Data Structure and Algorithm Problems. Th
 JavaScript, ES6, Node.js, Express, HTML, CSS, Python(For Preparing Dataset), Beautiful Soup(For Web Scraping)
 
 # Installation
-To clone the repo, run ```git clone https://github.com/Jourtics/search-engine-1.1.git``` in your terminal. After cloning the repo, run ```npm install``` to install the necessary dependencies.
+To clone the repo, run ```git clone https://github.com/Jourtics/search-engine.git``` in your terminal. After cloning the repo, run ```npm install``` to install the necessary dependencies.
 
 # Usage
 After installing all the dependencies, run ```npm start``` or ```node app.js``` or ```nodemon app.js``` in your terminal to start the application.
