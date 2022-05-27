@@ -72,6 +72,7 @@ app.get('/search', (req, res) => {
             QueryWords.push(query_Words[i])
     }
    
+    console.log(QueryWords)
     let len = QueryWords.length
     for (let i = 0; i < len; i++) {
         
@@ -84,7 +85,7 @@ app.get('/search', (req, res) => {
             if (corrected_words.length > 0)
                 QueryWords[i] = corrected_words[0].toLowerCase();
         }
-
+        console.log(QueryWords[i])
         // If query word is number, convert it into English Word Format.
         if (isNaN(QueryWords[i]) == false) {
             number=QueryWords[i]
