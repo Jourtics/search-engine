@@ -110,7 +110,7 @@ app.get('/search', (req, res) => {
 
     console.log(queryWords)
 
-    // calculate the term frequency for each word in query string
+    // calculate the term frequency for each word in the query string
     query_tf = []
     i = 0
     keywords.forEach(element => {
