@@ -15,7 +15,9 @@ After installing all the dependencies, run ```npm start``` or ```node app.js``` 
 
 # ScreenShot
 ![image](https://user-images.githubusercontent.com/67581281/170706419-b35670d7-d5fa-4e66-a212-2ea8d9851b6e.png)
+  
 ![image](https://user-images.githubusercontent.com/67581281/170706521-40c3ae6d-a705-4906-a4f9-0c5e75f78b56.png)
+  
 ![image](https://user-images.githubusercontent.com/67581281/170706648-fd5dbbea-645e-4d48-aa49-a00d938f6a2f.png)
 
 # Deployed 
