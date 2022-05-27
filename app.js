@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 
 
 // Read all the files and store in array
+// Split by '\r\n'
 
 titles = fs.readFileSync('./PS/titles.txt').toString().split(/\r?\n/)
 urls = fs.readFileSync('./PS/urls.txt').toString().split(/\r?\n/)
@@ -107,7 +108,7 @@ app.get('/search', (req, res) => {
         })
     }
 
-    // console.log(queryWords)
+    console.log(queryWords)
 
     // calculate the term frequency for each word in query string
     query_tf = []
